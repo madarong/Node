@@ -5,6 +5,34 @@
     <title>Title</title>
 </head>
 <body>
-
+<label for="user">用户</label>
+<input type="text" title="用户名" id="user"><br>
+<label for="pass">密码</label>
+<input type="password" title="密码" id="pass"><br>
+<input type="button" value="登陆">
 </body>
+<script src="jquery-2.2.4.min.js"></script>
+<script>
+    $('[value="登陆"]').click(function () {
+        var req = {
+            user: $("#user").val(),
+            pass: $("#pass").val(),
+        };
+        $.ajax({
+            url:"/login",
+            type: 'get',
+            data:req,
+            success: function (res) {
+                if(res['status']){
+                    alert('登陆成功');
+                }else{
+                    alert(res['msg'])
+                }
+            },
+            error: function (res) {
+                alert(res)
+            }
+        })
+    })
+</script>
 </html>
